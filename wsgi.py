@@ -19,12 +19,22 @@ migrate = get_migrate(app)
 def initialize():
     db.drop_all()
     db.create_all()
-    staff = create_user('bob','123', 'bobpass')
 
-    # staff2 = User.get_user(1)
+    # create users/staff
+    bob = create_user('bob','123', 'bobpass')
+    joe = create_user('joe', '124', 'joepass')
+
+    # staff2 = get_user(1)
     # print(staff.get_json())
 
-    # staff.add_student(816, "Josh")
+    # create a student
+    student_josh = add_student(816, "Josh")
+
+    # log 2 reviews
+    log_review(bob.staff_id, student_josh.student_id, "good", True)
+    log_review(bob.staff_id, student_josh.student_id, "gooder", True)
+
+    # print(get_karma_by_id(816))
 
 
     print('database intialized')
@@ -66,17 +76,28 @@ student_cli = AppGroup('student', help="student object commands")
 
 # @student_cli("create", help="creates a student")
 
-
-
 @student_cli.command("list", help="Lists students in the database")
 @click.argument("format", default="string")
 def list_students_command(format):
     if format == 'string':
-        print(get_all_students)
+        print(get_all_students())
     else:
         print(get_all_students_json())
 
 app.cli.add_command(student_cli)
+
+# review commands
+review_cli = AppGroup('review', help="review object commands")
+
+@review_cli.command("list", help="Lists reviews in the database")
+@click.argument("format", default="string")
+def list_reviews_command(format):
+    if format == 'string':
+        print(get_all_reviews())
+    else:
+        print(get_all_reviews_json())
+
+app.cli.add_command(review_cli)
 
 '''
 Test Commands

@@ -2,6 +2,7 @@ from App.models import User
 from App.database import db
 
 from App.models import Student
+from App.models import Review
 
 def create_user(username, staff_id, password):
     newuser = User(username=username, staff_id=staff_id, password=password)
@@ -9,15 +10,26 @@ def create_user(username, staff_id, password):
     db.session.commit()
     return newuser
 
+def log_review(staff_id, student_id, description, positive):
+    newReview = Review(staff_id=staff_id, student_id=student_id, description=description, positive=positive)
+    db.session.add(newReview)
+    db.session.commit()
+    return newReview
+
 # FUNCTIONS TO DO:
 #   add student, update student, log review, search student
 
+# maybe move to student controllers?
 def add_student(student_id, name):
     newStudent = Student(student_id=student_id, name=name, karma=0)
     db.session.add(newStudent)
     db.session.commit()
     return newStudent
 
+# finish this
+# def get_all_student_reviews(student_id):
+#     student = get_student(student_id)
+#     reviews = get_all_reviews()
 
 # def update_student(student_id, karma):
 

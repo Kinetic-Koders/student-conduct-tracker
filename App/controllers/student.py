@@ -8,6 +8,14 @@ from App.database import db
 #     return newStudent
 
 # GET KARMA
+def get_karma_by_id(student_id):
+    student = Student.query.filter_by(student_id=student_id).first()
+    if not student:
+        return -1
+    return student.get_karma()
+
+def get_student(student_id):
+    return Student.query.filter_by(student_id=student_id).first()
 
 def get_all_students():
     return Student.query.all()

@@ -6,6 +6,9 @@ class Student(db.Model):
     name = db.Column(db.String, nullable=False)
     karma = db.Column(db.Integer, nullable = True)
 
+    # exercise = db.relationship('ExerciseSet', backref = 'user')
+    
+
 
     # def __init__(self, id, name, karma):
     #     self.id = id
@@ -20,3 +23,7 @@ class Student(db.Model):
             "name":self.name,
             "karma":self.karma,
         }
+
+    # get karma score function?
+    def get_karma(self):
+        return self.karma

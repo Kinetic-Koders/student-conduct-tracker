@@ -8,6 +8,9 @@ class User(db.Model, UserMixin):
     username =  db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
 
+    # exercise = db.relationship('ExerciseSet', backref = 'user')
+    review = db.relationship('Review', backref = 'user')
+
     def __init__(self, username, staff_id, password):
         self.username = username
         self.staff_id = staff_id
