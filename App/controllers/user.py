@@ -27,24 +27,22 @@ def add_student(student_id, name):
     return newStudent
 
 # finish this
-# def get_all_student_reviews(student_id):
-#     student = get_student(student_id)
-#     reviews = get_all_reviews()
+def get_all_student_reviews_json(student_id):
+    # student = get_student(student_id)
+    reviews = Review.query.filter_by(student_id=student_id)
+
+    if not reviews:
+        return []
+    reviews = [review.get_json() for review in reviews]
+    return reviews
 
 # def update_student(student_id, karma):
-
-
-# def add_student(student_id, name):
-#     newStudent = Student(student_id=student_id, name=name, karma=0)
-#     db.session.add(newStudent)
-#     db.session.commit()
-#     return newStudent
 
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
 
 
-def get_user_by_staffid(staff_id):
+def get_user_by_staff_id(staff_id):
     return User.query.filter_by(staff_id=staff_id).first()
 
 
