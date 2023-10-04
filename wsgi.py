@@ -28,11 +28,15 @@ def initialize():
     # print(staff.get_json())
 
     # create a student
-    student_josh = add_student(816, "Josh")
+    student_1 = add_student(816, "Josh")
+    student_2 = add_student(817, "Paul")
 
     # log 2 reviews
-    log_review(bob.staff_id, student_josh.student_id, "good", True)
-    log_review(bob.staff_id, student_josh.student_id, "gooder", True)
+    log_review(bob.staff_id, student_1.student_id, "good", True)
+    log_review(bob.staff_id, student_1.student_id, "gooder", True)
+
+    log_review(bob.staff_id, student_2.student_id, "good", True)
+    log_review(joe.staff_id, student_2.student_id, "Bad", False)
 
     # print(get_karma_by_id(816))
 
@@ -98,6 +102,11 @@ def list_reviews_command(format):
         print(get_all_reviews())
     else:
         print(get_all_reviews_json())
+
+@review_cli.command("student", help="List all reviews for a particular student")
+@click.argument("student_id", default="816")
+def list_student_reviews(student_id):
+    print(get_all_student_reviews_json(student_id))
 
 app.cli.add_command(review_cli)
 
