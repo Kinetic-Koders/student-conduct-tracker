@@ -24,6 +24,9 @@ def get_all_reviews_json():
     return reviews
 
 
+
+
+
 # def update_review(id, description, positive):
 #     review = get_review(id)
 #     if review:
