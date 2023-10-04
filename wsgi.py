@@ -90,6 +90,8 @@ def list_students_command(format):
     else:
         print(get_all_students_json())
 
+# @student_cli.command("get", help="Get all information about a specific student")
+
 app.cli.add_command(student_cli)
 
 # review commands

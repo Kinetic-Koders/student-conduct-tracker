@@ -15,6 +15,8 @@ class Review(db.Model):
     # add some attribute for the overall karma of the individual review?
     # so that you can total the karma for reviews of a particular student_id
     # then add them up and place into Student object with student_id ????
+    upvotes = db.Column(db.Integer, default = 0, nullable = True)
+    downvotes = db.Column(db.Integer, default = 0, nullable = True)
 
     def __init__(self, description, staff_id, student_id, positive):
         self.description = description
@@ -22,9 +24,12 @@ class Review(db.Model):
         self.student_id = student_id
 
         self.positive = positive
+
+        self.upvotes = 0
+        self.downvotes = 0
     
     def __repr__(self):
-        return f'<Review {self.id} : {self.description} user {self.user.username}>'
+        return f'<Review {self.id} : {self.description} user {self.user.username}, up:{self.upvotes} down"{self.downvotes}>'
 
     def get_json(self):
         return{
@@ -32,7 +37,9 @@ class Review(db.Model):
             'description': self.description,
             'staff_id': self.staff_id,
             'student_id': self.student_id,
-            'positive': self.positive
+            'positive': self.positive,
+            'upvotes': self.upvotes,
+            'downvotes': self.downvotes
         }
     
     # get positive or not function?
@@ -42,29 +49,3 @@ class Review(db.Model):
     def get_Student_id(self):
         return self.student_id
 
-    # def __init__(self, user_id, exercise_id, name):
-    #     self.user_id = user_id
-    #     self.exercise_id = exercise_id
-    #     self.name = name
-
-    # def __repr__(self):
-    #     return f'<ExerciseSet {self.id} : {self.name} user {self.user.username}>'
-
-    # def get_json(self):
-    #     return{
-    #         'id': self.id,
-    #         'name': self.name,
-    #         'exercise': self.exercise.name,
-    #         'user_id': self.user_id
-    #     }
-
-
-
-# class ExerciseSet(db.Model):
-#     id = db.Column(db.Integer, primary_key = True)
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-#     exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
-#     name = db.Column(db.String, nullable = False)
-
-#     # ???
-#     exercise = db.relationship('Exercise')
