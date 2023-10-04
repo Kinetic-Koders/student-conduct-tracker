@@ -36,6 +36,8 @@ def initialize():
 
     # print(get_karma_by_id(816))
 
+    # try to print all reviews for a particular student_id
+
 
     print('database intialized')
 
