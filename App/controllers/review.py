@@ -2,7 +2,7 @@ from App.models import Review
 from App.database import db
 
 from App.models import Student
-from App.controllers import
+from App.controllers import *
 
 # def create_review(staff_id, student_id, description, positive):
 #     newReview = Review(staff_id=staff_id, student_id=student_id, description=description, positive=positive)
