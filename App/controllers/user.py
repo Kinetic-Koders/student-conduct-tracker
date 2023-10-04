@@ -37,6 +37,7 @@ def get_all_student_reviews_json(student_id):
     return reviews
 
 # figure out how to upvote, including how to check if already upvoted or not
+# uh
 def upvote_review(id, staff_id):
     review = get_review(id)
 
