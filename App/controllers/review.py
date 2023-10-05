@@ -2,6 +2,7 @@ from App.models import Review
 from App.database import db
 
 from App.models import Student
+# ???
 from App.controllers import *
 
 # def create_review(staff_id, student_id, description, positive):
@@ -11,7 +12,7 @@ from App.controllers import *
 #     return newReview
 
 def get_review(id):
-    review = Review.query.filter_by(id=id).first()
+    return Review.query.filter_by(id=id).first()
 
 def get_all_reviews():
     return Review.query.all()

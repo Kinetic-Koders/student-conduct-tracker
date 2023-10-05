@@ -3,6 +3,7 @@ from App.database import db
 
 from App.models import Student
 from App.models import Review
+from App.models import Vote
 
 def create_user(username, staff_id, password):
     newuser = User(username=username, staff_id=staff_id, password=password)
