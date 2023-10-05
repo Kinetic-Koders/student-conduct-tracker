@@ -1,5 +1,7 @@
 from App.database import db
 
+from sqlalchemy import CheckConstraint
+
 class Vote(db.Model):
     id = db.Column(db.Integer, primary_key = True)
 
@@ -10,7 +12,7 @@ class Vote(db.Model):
     value = db.Column(db.Integer, nullable = True, server_default = "0" )
 
     __table_args__ = (
-        CheckConstraint(value.in_([1, 0, -1]), name = 'check_vote_value')
+        CheckConstraint(value.in_([1, 0, -1]), name = 'check_vote_value'),
     )
 
     def __init__(self, staff_id, review_id):

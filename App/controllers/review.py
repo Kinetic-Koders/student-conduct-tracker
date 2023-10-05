@@ -12,7 +12,7 @@ from App.controllers import *
 #     return newReview
 
 def get_review(id):
-    review = Review.query.filter_by(id=id).first()
+    return Review.query.filter_by(id=id).first()
 
 def get_all_reviews():
     return Review.query.all()
