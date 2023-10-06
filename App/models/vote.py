@@ -15,9 +15,10 @@ class Vote(db.Model):
         CheckConstraint(value.in_([1, 0, -1]), name = 'check_vote_value'),
     )
 
-    def __init__(self, staff_id, review_id):
+    def __init__(self, staff_id, review_id, value):
         self.staff_id = staff_id
-        self.staff_id = staff_id
+        self.review_id = review_id
+        self.value = value
 
     def get_json(self):
         return{
