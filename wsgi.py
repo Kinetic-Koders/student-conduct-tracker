@@ -74,6 +74,14 @@ def list_user_command(format):
     else:
         print(get_all_users_json())
 
+@user_cli.command("vote", help="Votes on a particular review")
+@click.argument("staff_id", default="123")
+@click.argument("review_id", default="1")
+@click.argument("value", default="1")
+def user_vote(staff_id, review_id, value):
+    new_vote = do_vote(staff_id, review_id, value)
+    print(new_vote)
+
 app.cli.add_command(user_cli) # add the group to the cli
 
 
@@ -111,6 +119,20 @@ def list_student_reviews(student_id):
     print(get_all_student_reviews_json(student_id))
 
 app.cli.add_command(review_cli)
+
+# vote commands
+vote_cli = AppGroup('vote', help="vote object commands")
+
+@vote_cli.command("list", help="List all votes in the databse")
+@click.argument("format", default="string")
+def list_votes(format):
+    if format == "string":
+        print(get_all_votes())
+    else:
+        print(get_all_votes_json())
+
+
+app.cli.add_command(vote_cli)
 
 '''
 Test Commands
