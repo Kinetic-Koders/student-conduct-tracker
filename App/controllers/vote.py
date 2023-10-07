@@ -22,7 +22,7 @@ def do_vote(staff_id, review_id, value):
         db.session.add(new_vote)
         db.session.commit()
         return new_vote
-
+    # can put in an update_vote method
     elif exists.value != value:
             exists.value = value
             db.session.add(exists)

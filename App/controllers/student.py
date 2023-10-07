@@ -1,11 +1,20 @@
 from App.models import Student
 from App.database import db
 
+from App.models import Review
+from App.models import Vote
+
 # def add_student(student_id, name):
 #     newStudent = Student(student_id=student_id, name=name, karma=0)
 #     db.session.add(newStudent)
 #     db.session.commit()
 #     return newStudent
+
+# calculate karma
+def calc_karma():
+    # get all positive and negative reviews for a student
+    # get the difference in values for the positive and negatives
+    # use the difference in values ^ for the karma
 
 # GET KARMA
 def get_karma_by_id(student_id):
