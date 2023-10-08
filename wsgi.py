@@ -23,6 +23,7 @@ def initialize():
     # create users/staff
     bob = create_user('bob','123', 'bobpass')
     joe = create_user('joe', '124', 'joepass')
+    jeff = create_user('jeff', '125', 'jeffpass')
 
     # staff2 = get_user(1)
     # print(staff.get_json())
@@ -31,12 +32,31 @@ def initialize():
     student_1 = add_student(816, "Josh")
     student_2 = add_student(817, "Paul")
 
-    # log 2 reviews
-    log_review(bob.staff_id, student_1.student_id, "good", True)
-    log_review(bob.staff_id, student_1.student_id, "gooder", True)
+    # log reviews
+    review1 = log_review(bob.staff_id, student_1.student_id, "good", True)
 
-    log_review(bob.staff_id, student_2.student_id, "good", True)
-    log_review(joe.staff_id, student_2.student_id, "Bad", False)
+    review2 = log_review(bob.staff_id, student_1.student_id, "gooder", True)
+    review6 = log_review(bob.staff_id, student_1.student_id, "badd", False)
+
+    review3 = log_review(bob.staff_id, student_2.student_id, "good", True)
+    review4 = log_review(joe.staff_id, student_2.student_id, "Bad", False)
+    review5 = log_review(bob.staff_id, student_2.student_id, "gooder", True)
+
+    # do some votes
+    # bob votes positive on review 1
+    do_vote(bob.staff_id, review1.id, 1)
+
+    # joe votes positive on review 1
+    do_vote(joe.staff_id, review1.id, 1)
+
+    do_vote(jeff.staff_id, review1.id, -1)
+    
+
+    # bob changes to negative on review 1
+    # do_vote(bob.staff_id, review1.id, -1)
+    
+    # joe votes the same value again which unvotes
+    # do_vote(joe.staff_id, review1.id, 1)
 
     # print(get_karma_by_id(816))
 
@@ -80,7 +100,8 @@ def list_user_command(format):
 @click.argument("value", default="1")
 def user_vote(staff_id, review_id, value):
     new_vote = do_vote(staff_id, review_id, value)
-    print(new_vote)
+    
+    print(new_vote.get_json())
 
 app.cli.add_command(user_cli) # add the group to the cli
 

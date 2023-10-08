@@ -9,11 +9,13 @@ class Student(db.Model):
     # exercise = db.relationship('ExerciseSet', backref = 'user')
     
 
+    # this was commented off the whole time, not sure why
+    def __init__(self, student_id, name):
+        self.student_id = student_id
+        self.name = name
+        self.karma = 0
 
-    # def __init__(self, id, name, karma):
-    #     self.id = id
-    #     self.exercise_id = exercise_id
-    #     self.name = name
+
 
     # get_json function
     def get_json(self):
@@ -27,3 +29,10 @@ class Student(db.Model):
     # get karma score function?
     def get_karma(self):
         return self.karma
+
+    # # calculate karma
+    # def calc_karma():
+    #     # get all positive and negative reviews for a student
+    #     pos_reviews = Reviews.query.filter_by(student_id=)
+    #     # get the difference in values for the positive and negatives
+    #     # use the difference in values ^ for the karma

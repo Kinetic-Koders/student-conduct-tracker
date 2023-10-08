@@ -22,7 +22,7 @@ def log_review(staff_id, student_id, description, positive):
 
 # maybe move to student controllers?
 def add_student(student_id, name):
-    newStudent = Student(student_id=student_id, name=name, karma=0)
+    newStudent = Student(student_id=student_id, name=name)
     db.session.add(newStudent)
     db.session.commit()
     return newStudent
