@@ -11,6 +11,12 @@ from App.controllers import *
 #     db.session.commit()
 #     return newReview
 
+def get_student_id_from_review(id):
+    review = get_review(id)
+    student_id = review.student_id 
+
+    return student_id
+
 def get_review(id):
     return Review.query.filter_by(id=id).first()
 
