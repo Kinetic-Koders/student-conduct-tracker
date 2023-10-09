@@ -48,8 +48,12 @@ def initialize():
 
     # joe votes positive on review 1
     do_vote(joe.staff_id, review1.id, 1)
-
     do_vote(jeff.staff_id, review1.id, -1)
+
+    do_vote(bob.staff_id, review2.id, 1)
+    do_vote(joe.staff_id, review2.id, 1)
+
+    do_vote(bob.staff_id, review6.id, 1)
     
 
     # bob changes to negative on review 1
