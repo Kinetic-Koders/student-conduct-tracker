@@ -4,6 +4,8 @@ from App.database import db
 from App.models import Review
 from App.models import Vote
 
+from App.controllers import get_student
+
 # from App.controllers import get_total_votes
 
 # def add_student(student_id, name):
@@ -105,8 +107,8 @@ def get_karma_by_id(student_id):
         return 0
     return student.get_karma()
 
-def get_student(student_id):
-    return Student.query.filter_by(student_id=student_id).first()
+# def get_student(student_id):
+#     return Student.query.filter_by(student_id=student_id).first()
 
 def get_all_students():
     return Student.query.all()

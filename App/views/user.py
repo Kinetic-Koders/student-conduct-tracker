@@ -56,13 +56,27 @@ def log_review_endpoint():
     log_review(data['staff_id'], data['student_id'], data['description'], data['positive'])
     return jsonify({'message:' "review created!"})
 
+#log a review
+# @users_views.route('/api/users/review/<staff_id>/<student_id>/<description>/<positive>', methods=['POST'])
+# #  login required
+# def log_review_endpoint(staff_id, student_id, description, positive):
+#     review = log_review(staff_id, student_id, description, positive)
+#     return jsonify({'message:' "review created"})
+
 # get all studentsjson route
 @user_views.route('/api/users/students', methods=['GET'])
 def get_all_students_endpoint():
     students = get_all_students_json()
     return jsonify(students)
 
-# get a student
+# get a student by id
+@user_views.route('/api/users/student/<int:student_id>', methods=['GET'])
+# login required
+def get_student_by_id(student_id):
+    student = get_student(student_id)
+    return jsonify(student.get_json())
+
+
 
 
 @user_views.route('/users', methods=['POST'])
