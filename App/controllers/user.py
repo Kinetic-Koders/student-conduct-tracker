@@ -27,6 +27,8 @@ def add_student(student_id, name):
     db.session.commit()
     return newStudent
 
+def get_student(student_id):
+    return Student.query.filter_by(student_id=student_id).first()
 
 def get_all_student_reviews_json(student_id):
     # student = get_student(student_id)
