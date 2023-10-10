@@ -9,7 +9,10 @@ from App.controllers import (
     jwt_authenticate, 
     get_all_users,
     get_all_users_json,
-    jwt_required
+    jwt_required,
+    add_student,
+    get_all_students_json,
+    get_student
 )
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
@@ -27,14 +30,46 @@ def get_users_action():
 @user_views.route('/api/users', methods=['POST'])
 def create_user_endpoint():
     data = request.json
-    create_user(data['username'], data['password'])
+    create_user(data['username'],data['staff_id'], data['password'])
     return jsonify({'message': f"user {data['username']} created"})
+
+# MY VIEWS, HAVE TO TEST WITH POSTMAN
+
+# MIGHT HAVE TO CHANGE RETURN MSGS
+# MIGHT HAVE TO MOVE TO INDEX VIEWS
+
+# DO:   get all reviews json route
+#       voting
+#       authorization? login, logoff etc.
+
+# add students route
+@user_views.route('/api/users/add_student', methods=['POST'])
+def add_student_endpoint():
+    data = request.jsonify
+    add_student(data['student_id'], data['name'])
+    return jsonify({'message:'f"student {data['name']} added"})
+
+#  log review route
+@user_views.route('/api/users/log_review', methods=['POST'])
+def log_review_endpoint():
+    data = request.jsonify
+    log_review(data['staff_id'], data['student_id'], data['description'], data['positive'])
+    return jsonify({'message:' "review created!"})
+
+# get all studentsjson route
+@user_views.route('/api/users/students', methods=['GET'])
+def get_all_students_endpoint():
+    students = get_all_students_json()
+    return jsonify(students)
+
+# get a student
+
 
 @user_views.route('/users', methods=['POST'])
 def create_user_action():
     data = request.form
     flash(f"User {data['username']} created!")
-    create_user(data['username'], data['password'])
+    create_user(data['username'],data['staff_id'], data['password'])
     return redirect(url_for('user_views.get_user_page'))
 
 @user_views.route('/static/users', methods=['GET'])
