@@ -20,6 +20,9 @@ def initialize():
     db.drop_all()
     db.create_all()
 
+
+    # dummy/ starter values to run upon init to have some populated data
+
     # create users/staff
     bob = create_user('bob','123', 'bobpass')
     joe = create_user('joe', '124', 'joepass')
@@ -55,16 +58,6 @@ def initialize():
 
     do_vote(bob.staff_id, review6.id, 1)
     
-
-    # bob changes to negative on review 1
-    # do_vote(bob.staff_id, review1.id, -1)
-    
-    # joe votes the same value again which unvotes
-    # do_vote(joe.staff_id, review1.id, 1)
-
-    # print(get_karma_by_id(816))
-
-    # try to print all reviews for a particular student_id
 
 
     print('database intialized')

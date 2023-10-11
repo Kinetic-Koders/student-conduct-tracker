@@ -55,7 +55,7 @@ def calc_karma(student_id):
         vote_diff += (pos_votes - neg_votes)
 
         #  printing for debugging
-        print("pos_reviews loop: ", pos_votes, "  ", neg_votes)
+        # print("pos_reviews loop: ", pos_votes, "  ", neg_votes)
         
         # print(vote_diff)
     
@@ -69,12 +69,12 @@ def calc_karma(student_id):
 
 
         #  printing for debugging
-        print("neg_reviews loop: ", pos_votes, "  ", neg_votes)
+        # print("neg_reviews loop: ", pos_votes, "  ", neg_votes)
         # print("test")
 
     #  printing for debugging
-    print("total votes = ", total_votes)
-    print("vote difference = ", vote_diff, "\n")
+    # print("total votes = ", total_votes)
+    # print("vote difference = ", vote_diff, "\n")
     
     #  FIGURE OUT BETTER FORMULA FOR KARMA VALUE
 

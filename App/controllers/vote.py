@@ -26,7 +26,7 @@ def do_vote(staff_id, review_id, value):
 
         # 
         student_id = get_student_id_from_review(review_id)
-        print(student_id)
+        # print(student_id)
         calc_karma(student_id)
 
         return new_vote
