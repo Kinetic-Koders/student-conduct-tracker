@@ -33,7 +33,7 @@ def create_user_endpoint():
     create_user(data['username'],data['staff_id'], data['password'])
     return jsonify({'message': f"user {data['username']} created"})
 
-# MY VIEWS, HAVE TO TEST WITH POSTMAN
+# MY VIEWS, HAVE TO TEST WITH POSTMAN - use gitpod workspace instead of github codespace
 
 # MIGHT HAVE TO CHANGE RETURN MSGS
 # MIGHT HAVE TO MOVE TO INDEX VIEWS
