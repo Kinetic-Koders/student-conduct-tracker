@@ -30,9 +30,4 @@ class Student(db.Model):
     def get_karma(self):
         return self.karma
 
-    # # calculate karma
-    # def calc_karma():
-    #     # get all positive and negative reviews for a student
-    #     pos_reviews = Reviews.query.filter_by(student_id=)
-    #     # get the difference in values for the positive and negatives
-    #     # use the difference in values ^ for the karma
+    

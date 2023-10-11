@@ -39,18 +39,6 @@ def get_all_student_reviews_json(student_id):
     reviews = [review.get_json() for review in reviews]
     return reviews
 
-# figure out how to upvote, including how to check if already upvoted or not
-
-# def upvote_review(id, staff_id):
-#     review = get_review(id)
-
-
-
-#     # review.upvotes += 1
-
-# def downvote_review(id):
-#     review = get_review(id)
-#     review.downvotes += 1
 
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
