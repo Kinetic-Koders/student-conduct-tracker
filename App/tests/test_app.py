@@ -10,7 +10,16 @@ from App.controllers import (
     login,
     get_user,
     get_user_by_username,
-    update_user
+    update_user,
+    add_student,
+    get_student,
+    get_all_students_json,
+    log_review,
+    get_review,
+    get_all_reviews_json,
+    check_voted,
+    do_vote,
+    get_all_votes_json
 )
 
 
@@ -77,3 +86,61 @@ class UsersIntegrationTests(unittest.TestCase):
         assert user.username == "ronnie"
 
     # insert other tests here
+    #todo: 
+    # add student & get all students json
+    # log review & get all reviews json
+    # vote & get all votes json
+
+    # add student test
+    def test_add_student(self):
+        add_student(816, "Josh")
+        student = get_student(816)
+        assert student.name == "Josh"
+
+    # get all students json test
+    def test_get_all_students_json(self):
+        # add in another student to get back a list
+        add_student(817, "Paul")
+
+        students_json = get_all_students_json()
+        self.assertListEqual([{"id":1, "student_id":816, "name":"Josh", "karma":0}, {"id":2, "student_id":817, "name":"Paul", "karma":0}],students_json)
+
+    # log review test
+    def test_log_review(self):
+        # log a positive review
+        review1 = log_review(123, 816, "Good boy", True)
+        # log a negative review
+        review2 = log_review(321, 816, "Bad boy", False)
+
+        # review1 = get_review(1)
+        # review2 = get_review(2)
+
+        assert review1.description == "Good boy" and review2.description == "Bad boy"
+    
+    # get all reviews json
+    # z added so when ran in alphabetical order it runs after logging reviews
+    def test_zget_all_reviews_json(self):
+
+        reviews_json = get_all_reviews_json()
+
+        print(reviews_json)
+        
+        self.assertListEqual([{"id":1, "description":"Good boy", "staff_id":123, "student_id":816, "positive":True}, {"id":2, "description":"Bad boy", "staff_id":321, "student_id":816, "positive":False}], reviews_json)
+
+    # vote tests
+    def test_vote(self):
+        # do 2 positive votes on review 1
+        vote1 = do_vote(123, 1, 1)
+
+        # do_vote(321, 1, 1)
+
+        # vote1 = get_vote(1)
+        # vote2 = get_vote(2)
+
+        # self.assertListEqual([{'id':1,'staff_id':123,'review_id':1,'self.value':1}])
+        assert vote1.id == 1
+
+        # self.assertListEqual([{'id':1,'staff_id':123,'review_id':1,'self.value':1}], get_all_votes_json())
+        
+
+
