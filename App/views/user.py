@@ -31,22 +31,40 @@ def get_users_action():
     return jsonify(users)
 
 # done
+# @user_views.route('/api/users', methods=['POST'])
+# def create_user_endpoint():
+#     data = request.json
+#     create_user(data['username'],data['staff_id'], data['password'])
+#     return jsonify({'message': f"user {data['username']} created"})
+
+# route that return erros message if already created
 @user_views.route('/api/users', methods=['POST'])
 def create_user_endpoint():
     data = request.json
-    create_user(data['username'],data['staff_id'], data['password'])
-    return jsonify({'message': f"user {data['username']} created"})
+    result = create_user(data['username'],data['staff_id'], data['password'])
+    if result:
+        return jsonify({'message': f"user {data['username']} created"}), 201
+    return jsonify({'message': f"user {data['username']} or {data['staff_id']} already exists"}), 500
 
 
 
 # add students route
 # done
+# @user_views.route('/api/users/add_student', methods=['POST'])
+# def add_student_endpoint():
+#     data = request.json
+#     add_student(data['student_id'], data['name'])
+#     return jsonify({'message':f"student {data['name']} added"})
+#     # return jsonify({'message': f"user {data['username']} created"})
+
+# route that returns error message if already created
 @user_views.route('/api/users/add_student', methods=['POST'])
 def add_student_endpoint():
     data = request.json
-    add_student(data['student_id'], data['name'])
-    return jsonify({'message':f"student {data['name']} added"})
-    # return jsonify({'message': f"user {data['username']} created"})
+    result = add_student(data['student_id'], data['name'])
+    if result:
+        return jsonify({'message':f"student {data['name']} added"}), 201
+    return jsonify({'message': f"student {data['username']} or {data['student_id']} already exists"}), 500
 
 #  log review route
 # done
