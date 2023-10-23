@@ -64,7 +64,7 @@ def add_student_endpoint():
     result = add_student(data['student_id'], data['name'])
     if result:
         return jsonify({'message':f"student {data['name']} added"}), 201
-    return jsonify({'message': f"student {data['username']} or {data['student_id']} already exists"}), 500
+    return jsonify({'message': f"student {data['name']} or {data['student_id']} already exists"}), 500
 
 #  log review route
 # done
