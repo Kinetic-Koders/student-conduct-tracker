@@ -123,7 +123,7 @@ class UsersIntegrationTests(unittest.TestCase):
 
         reviews_json = get_all_reviews_json()
 
-        print(reviews_json)
+        # print(reviews_json)
         
         self.assertListEqual([{"id":1, "description":"Good boy", "staff_id":123, "student_id":816, "positive":True}, {"id":2, "description":"Bad boy", "staff_id":321, "student_id":816, "positive":False}], reviews_json)
 
@@ -141,6 +141,10 @@ class UsersIntegrationTests(unittest.TestCase):
         assert vote1.id == 1
 
         # self.assertListEqual([{'id':1,'staff_id':123,'review_id':1,'self.value':1}], get_all_votes_json())
-        
+    # get all votes json test
+    # z added in name so when ran in order it runs after actually adding votes
+    def test_zget_all_votes_json(self):
 
+        votes_json = get_all_votes_json()
+        self.assertListEqual([{'id':1,'staff_id':123,'review_id':1,'self.value':1}], votes_json)
 
