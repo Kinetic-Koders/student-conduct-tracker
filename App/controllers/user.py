@@ -5,11 +5,23 @@ from App.models import Student
 from App.models import Review
 from App.models import Vote
 
+# def create_user(username, staff_id, password):
+#     newuser = User(username=username, staff_id=staff_id, password=password)
+#     db.session.add(newuser)
+#     db.session.commit()
+#     return newuser
+
+# create user method that accounts for adding the same values
 def create_user(username, staff_id, password):
     newuser = User(username=username, staff_id=staff_id, password=password)
-    db.session.add(newuser)
-    db.session.commit()
-    return newuser
+    try:
+        db.session.add(newuser)
+        db.session.commit()
+        return newuser
+    except:
+        db.session.rollback()
+        return None
+
 
 def log_review(staff_id, student_id, description, positive):
     newReview = Review(staff_id=staff_id, student_id=student_id, description=description, positive=positive)
@@ -21,11 +33,22 @@ def log_review(staff_id, student_id, description, positive):
 #   add student, update student, log review, search student
 
 # maybe move to student controllers?
+# def add_student(student_id, name):
+#     newStudent = Student(student_id=student_id, name=name)
+#     db.session.add(newStudent)
+#     db.session.commit()
+#     return newStudent
+
+# add student method that accounts for adding the same values
 def add_student(student_id, name):
     newStudent = Student(student_id=student_id, name=name)
-    db.session.add(newStudent)
-    db.session.commit()
-    return newStudent
+    try:
+        db.session.add(newStudent)
+        db.session.commit()
+        return newStudent
+    except:
+        db.session.rollback()
+        return None
 
 def get_student(student_id):
     return Student.query.filter_by(student_id=student_id).first()
