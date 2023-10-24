@@ -48,6 +48,7 @@ def initialize():
     # do some votes
     # bob votes positive on review 1
     do_vote(bob.staff_id, review1.id, 1)
+    do_vote(bob.staff_id, review1.id, 1)
 
     # joe votes positive on review 1
     do_vote(joe.staff_id, review1.id, 1)
@@ -97,8 +98,13 @@ def list_user_command(format):
 @click.argument("value", default="1")
 def user_vote(staff_id, review_id, value):
     new_vote = do_vote(staff_id, review_id, value)
-    
-    print(new_vote.get_json())
+
+    if new_vote is None:
+        print("Vote deleted")
+    elif new_vote == 0:
+        print("Error")
+    else:
+        print(new_vote.get_json())
 
 app.cli.add_command(user_cli) # add the group to the cli
 

@@ -68,11 +68,20 @@ def add_student_endpoint():
 
 #  log review route
 # done
+# @user_views.route('/api/users/log_review', methods=['POST'])
+# def log_review_endpoint():
+#     data = request.json
+#     log_review(data['staff_id'], data['student_id'], data['description'], data['positive'])
+#     return jsonify({'message': "review created!"})
+
+# returns error if neeeded
 @user_views.route('/api/users/log_review', methods=['POST'])
 def log_review_endpoint():
     data = request.json
-    log_review(data['staff_id'], data['student_id'], data['description'], data['positive'])
-    return jsonify({'message': "review created!"})
+    result = log_review(data['staff_id'], data['student_id'], data['description'], data['positive'])
+    if result:
+        return jsonify({'message': f"review {result.id} created!"}), 201
+    return jsonify({'message':'error review not created'}), 500
 
 # get all studentsjson route
 # done
@@ -90,11 +99,21 @@ def get_student_by_id(student_id):
     return jsonify(student.get_json())
 
 # vote
+# @user_views.route('/api/users/vote', methods=["POST"])
+# def vote_endpoint():
+#     data = request.json
+#     do_vote(data['staff_id'], data['review_id'], data['value'])
+#     return jsonify({'message': "vote completed!"})
+
 @user_views.route('/api/users/vote', methods=["POST"])
 def vote_endpoint():
     data = request.json
-    do_vote(data['staff_id'], data['review_id'], data['value'])
-    return jsonify({'message': "vote completed!"})
+    result = do_vote(data['staff_id'], data['review_id'], data['value'])
+    if result:
+        return jsonify({'message': f"vote {result.id} completed!"}), 201
+    elif result is None:
+        return jsonify({'message': "vote deleted!"}), 204
+    return jsonify({'message':'error deleting vote'}), 500
 
 
 
