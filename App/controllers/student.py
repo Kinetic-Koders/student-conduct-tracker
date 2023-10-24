@@ -89,7 +89,10 @@ def calc_karma(student_id):
     # this sets the value to a minimum karma of 1 and max of 100, does not account for negative karma 
     # karma = min(max((int(vote_diff / total_votes) + 1) * 100, -100), 100)
 
-    karma = round((vote_diff / total_votes) * 100, 2)
+    if vote_diff == 0 or total_votes == 0:
+        karma = 0
+    else:
+        karma = round((vote_diff / total_votes) * 100, 2)
 
     #  update the karma for the student
     update_karma(student_id, karma)

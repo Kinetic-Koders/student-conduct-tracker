@@ -18,6 +18,7 @@ def check_voted(review_id, staff_id):
 def do_vote(staff_id, review_id, value):
 
     exists = check_voted(review_id, staff_id)
+    value = int(value)
 
     if exists is None:
         new_vote = Vote(staff_id=staff_id, review_id=review_id, value=value)
@@ -32,6 +33,7 @@ def do_vote(staff_id, review_id, value):
         return new_vote
     # can put in an update_vote method ?
     elif exists.value != value:
+            print(exists.value, " ", value)
             exists.value = value
             db.session.add(exists)
             db.session.commit()
@@ -54,7 +56,7 @@ def do_vote(staff_id, review_id, value):
     # student = get_student_id_from_review(review_id)
     # calc_karma(student.id)
 
-    return None
+    return 0
 
 def get_total_votes(review_id):
     votes_list = get_all_votes()
