@@ -72,7 +72,7 @@ def get_total_votes(review_id):
     return total
 
 def get_vote(id):
-    return Vote.query.filter_by(id=id)
+    return Vote.query.filter_by(id=id).first()
 
 def get_all_votes():
     return Vote.query.all()

@@ -19,6 +19,7 @@ from App.controllers import (
     get_all_reviews_json,
     check_voted,
     do_vote,
+    get_vote,
     get_all_votes_json
 )
 
@@ -105,46 +106,33 @@ class UsersIntegrationTests(unittest.TestCase):
         students_json = get_all_students_json()
         self.assertListEqual([{"id":1, "student_id":816, "name":"Josh", "karma":0}, {"id":2, "student_id":817, "name":"Paul", "karma":0}],students_json)
 
-    # log review test
     def test_log_review(self):
-        # log a positive review
-        review1 = log_review(123, 816, "Good boy", True)
-        # log a negative review
-        review2 = log_review(321, 816, "Bad boy", False)
+        log_review(123, 816, "Good boy", True)
+        review1 = get_review(1)
 
-        # review1 = get_review(1)
-        # review2 = get_review(2)
-
-        assert review1.description == "Good boy" and review2.description == "Bad boy"
+        self.assertDictEqual({"id":1, "description":"Good boy", "staff_id":123, "student_id":816, "positive":True}, review1.get_json())
     
     # get all reviews json
     # z added so when ran in alphabetical order it runs after logging reviews
     def test_zget_all_reviews_json(self):
-
+        log_review(321, 816, "Bad boy", False)
         reviews_json = get_all_reviews_json()
 
-        # print(reviews_json)
-        
-        self.assertListEqual([{"id":1, "description":"Good boy", "staff_id":123, "student_id":816, "positive":True}, {"id":2, "description":"Bad boy", "staff_id":321, "student_id":816, "positive":False}], reviews_json)
+        self.assertListEqual([{"id":1, "description":"Good boy", "staff_id":123, "student_id":816, "positive":True},
+                        {"id":2, "description":"Bad boy", "staff_id":321, "student_id":816, "positive":False}], reviews_json)
 
     # vote tests
     def test_vote(self):
-        # do 2 positive votes on review 1
-        vote1 = do_vote(123, 1, 1)
+        do_vote(123, 1, 1)
+        vote1 = get_vote(1)
 
-        # do_vote(321, 1, 1)
-
-        # vote1 = get_vote(1)
-        # vote2 = get_vote(2)
-
-        # self.assertListEqual([{'id':1,'staff_id':123,'review_id':1,'self.value':1}])
-        assert vote1.id == 1
-
-        # self.assertListEqual([{'id':1,'staff_id':123,'review_id':1,'self.value':1}], get_all_votes_json())
+        self.assertDictEqual({'id':1,'staff_id':123,'review_id':1,'self.value':1}, vote1.get_json())
+  
     # get all votes json test
     # z added in name so when ran in order it runs after actually adding votes
     def test_zget_all_votes_json(self):
+        do_vote(321, 1, 1)
 
         votes_json = get_all_votes_json()
-        self.assertListEqual([{'id':1,'staff_id':123,'review_id':1,'self.value':1}], votes_json)
+        self.assertListEqual([{'id':1,'staff_id':123,'review_id':1,'self.value':1},{'id':2,'staff_id':321,'review_id':1,'self.value':1}], votes_json)
 
